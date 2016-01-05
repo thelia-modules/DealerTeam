@@ -11,9 +11,7 @@
     </loops>
 
     <forms>
-        <!--
-        <form name="MyFormName" class="DealerTeam\Form\MySuperForm" />
-        -->
+        <form name="dealer_team_team_create" class="DealerTeam\Form\TeamFormCreate" />
     </forms>
 
     <commands>
@@ -31,14 +29,14 @@
         </service>
     </services>
 
-
-    <!--
     <hooks>
-        <hook id="dealerteam.hook" class="DealerTeam\Hook\MySuperHook" scope="request">
-            <tag name="hook.event_listener" event="main.body.bottom" type="front|back|pdf|email" method="onMainBodyBottom" />
+        <hook id="dealerteam.admin.hook" class="DealerTeam\Hook\AdminHook" scope="request">
+            <argument type="service" id="service_container"/>
+            <tag name="hook.event_listener" event="dealer.additional" type="back" method="onDealerEditTab"/>
+            <tag name="hook.event_listener" event="dealer.edit.js" type="back" method="onDealerEditJs"/>
         </hook>
     </hooks>
-    -->
+
 
     <!--
     <exports>

@@ -28,4 +28,9 @@
     </route>
     -->
 
+
+    <route id="dealerteam.team.create" path="/admin/module/DealerTeam/team" methods="post">
+        <default key="_controller">DealerTeam:Team:create</default>
+    </route>
+
 </routes>
