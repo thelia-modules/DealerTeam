@@ -24,7 +24,7 @@ form_enctype       = {form_enctype form=$form}
   {form_field form=$form field="id"}
     <input type="hidden" id="{$label_attr.for}" name="{$name}" value=""/>
   {/form_field}
-  {include file="form/team-create.html" form_name="team.update" team_id=$smarty.get.team_id}
+  {include file="custom-includes/form/team-create.html" form_name="team.update" update=true}
 {/capture}
 
   {include file="includes/generic-create-dialog.html"
@@ -44,6 +44,7 @@ form_enctype       = {form_enctype form=$form}
 {capture "team_delete"}
   {intl l="Do you really want to delete this Team ?" d="team.bo.default"}
   <input type="hidden" name="team_id" id="team_delete_id" value="" />
+  <input type="hidden" name="dealer_id" value="{$dealer_id}" />
 {/capture}
 
 {include file="includes/generic-confirm-dialog.html"
@@ -55,5 +56,5 @@ dialog_message  = {$smarty.capture.team_delete nofilter}
 dialog_ok_label     = {intl l="Delete"}
 dialog_cancel_label = {intl l="Cancel"}
 
-form_action         = {token_url path='/admin/module/Team/team/delete'}
+form_action         = {token_url path='/admin/module/DealerTeam/team/delete'}
 }

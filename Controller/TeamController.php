@@ -14,10 +14,12 @@
 namespace DealerTeam\Controller;
 
 use Propel\Runtime\Propel;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Team\Team;
 use Thelia\Core\Security\AccessManager;
 use Thelia\Core\Security\Resource\AdminResources;
 use Thelia\Form\Exception\FormValidationException;
+use Thelia\Tools\URL;
 
 /**
  * Class TeamController
@@ -89,6 +91,20 @@ class TeamController extends \Team\Controller\TeamController
         }
 
     }
+
+
+    /**
+     * @inheritDoc
+     */
+    protected function redirectToListTemplate()
+    {
+        $id = $this->getRequest()->query->get("dealer_id");
+        if(null === $id){
+            $id = $this->getRequest()->request->get("dealer_id");
+        }
+        return new RedirectResponse(URL::getInstance()->absoluteUrl("/admin/module/Dealer/dealer/edit#team",["dealer_id" => $id]));
+    }
+
 
     /**
      * @inheritDoc

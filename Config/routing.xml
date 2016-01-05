@@ -33,4 +33,9 @@
         <default key="_controller">DealerTeam:Team:create</default>
     </route>
 
+
+    <route id="dealerteam.team.delete" path="/admin/module/DealerTeam/team/delete" methods="post">
+        <default key="_controller">DealerTeam:Team:delete</default>
+    </route>
+
 </routes>
