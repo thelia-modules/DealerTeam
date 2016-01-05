@@ -1,4 +1,7 @@
 <?php
 return array(
-    // 'an english string' => 'La traduction française de la chaine',
+    "Team" => "Équipe",
+    "First Name" => "Prénom",
+    "Last Name" => "Nom de famille",
+    "Title" => "Nom",
 );
