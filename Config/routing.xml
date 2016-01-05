@@ -4,38 +4,17 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
 
-    <!--
-
-    if a /admin/module/dealerteam/ route is provided, a "Configuration" button will be displayed
-    for the module in the module list. Clicking this button will invoke this route.
-
-    <route id="my_route_id" path="/admin/module/dealerteam">
-        <default key="_controller">DealerTeam\Full\Class\Name\Of\YourConfigurationController::methodName</default>
-    </route>
-
-    <route id="my_route_id" path="/admin/module/dealerteam/route-name">
-        <default key="_controller">DealerTeam\Full\Class\Name\Of\YourAdminController::methodName</default>
-    </route>
-
-    <route id="my_route_id" path="/my/route/name">
-        <default key="_controller">DealerTeam\Full\Class\Name\Of\YourOtherController::methodName</default>
-    </route>
-
-    ...add as many routes as required.
-
-    <route>
-    ...
-    </route>
-    -->
-
 
     <route id="dealerteam.team.create" path="/admin/module/DealerTeam/team" methods="post">
         <default key="_controller">DealerTeam:Team:create</default>
     </route>
 
-
     <route id="dealerteam.team.delete" path="/admin/module/DealerTeam/team/delete" methods="post">
         <default key="_controller">DealerTeam:Team:delete</default>
+    </route>
+
+    <route id="dealerteam.person.delete" path="/admin/module/DealerTeam/person/delete" methods="post">
+        <default key="_controller">DealerTeam:Person:delete</default>
     </route>
 
 </routes>

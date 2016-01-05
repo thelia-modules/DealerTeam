@@ -22,6 +22,7 @@ form_enctype       = {form_enctype form=$form}
 {capture "person_delete"}
     {intl l="Do you really want to delete this Person ?" d="team.bo.default"}
     <input type="hidden" name="person_id" id="person_delete_id" value=""/>
+    <input type="hidden" name="dealer_id" value="{$dealer_id}" />
 {/capture}
 
 {include file="includes/generic-confirm-dialog.html"
@@ -33,5 +34,5 @@ dialog_message  = {$smarty.capture.person_delete nofilter}
 dialog_ok_label     = {intl l="Delete"}
 dialog_cancel_label = {intl l="Cancel"}
 
-form_action         = {token_url path='/admin/module/Team/person/delete'}
+form_action         = {token_url path='/admin/module/DealerTeam/person/delete'}
 }
