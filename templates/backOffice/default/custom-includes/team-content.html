@@ -45,7 +45,7 @@
     <br>
     {ifloop rel="team"}
       <div class="panel-group" id="teams" role="tablist" aria-multiselectable="true">
-        {loop type="team" name="team"}
+        {loop type="dealer_team_team" name="team" dealer_id=$dealer}
           <div class="panel panel-default">
             <div class="panel-heading" role="tab" id="heading-{$ID}">
               <h4 class="panel-title">
