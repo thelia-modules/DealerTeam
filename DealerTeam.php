@@ -12,6 +12,9 @@
 
 namespace DealerTeam;
 
+use DealerTeam\Model\DealerTeamQuery;
+use Propel\Runtime\Connection\ConnectionInterface;
+use Thelia\Install\Database;
 use Thelia\Module\BaseModule;
 
 class DealerTeam extends BaseModule
@@ -19,10 +22,13 @@ class DealerTeam extends BaseModule
     /** @var string */
     const DOMAIN_NAME = 'dealerteam';
 
-    /*
-     * You may now override BaseModuleInterface methods, such as:
-     * install, destroy, preActivation, postActivation, preDeactivation, postDeactivation
-     *
-     * Have fun !
-     */
+    public function postActivation(ConnectionInterface $con = null)
+    {
+        try {
+            DealerTeamQuery::create()->findOne();
+        } catch (\Exception $e) {
+            $database = new Database($con);
+            $database->insertSql(null, [__DIR__ . "/Config/thelia.sql"]);
+        }
+    }
 }

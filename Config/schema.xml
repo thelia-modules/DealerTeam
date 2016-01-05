@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database defaultIdMethod="native" name="thelia"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:noNamespaceSchemaLocation="../../../../vendor/propel/propel/resources/xsd/database.xsd" >
+
+    <table name="dealer_team" namespace="DealerTeam\Model">
+        <column autoIncrement="true" name="id" primaryKey="true" required="true" type="INTEGER" />
+        <column name="dealer_id" required="true" type="INTEGER"/>
+        <column name="team_id" required="true" type="INTEGER"/>
+
+        <foreign-key foreignTable="dealer" name="fk_dealer_team_dealer_id" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference foreign="id" local="dealer_id" />
+        </foreign-key>
+
+        <foreign-key foreignTable="team" name="fk_dealer_team_team_id" onDelete="CASCADE" onUpdate="RESTRICT">
+            <reference foreign="id" local="team_id" />
+        </foreign-key>
+
+        <behavior name="timestampable" />
+        <behavior name="versionable">
+            <parameter name="log_created_at" value="true" />
+            <parameter name="log_created_by" value="true" />
+        </behavior>
+    </table>
+
+    <external-schema filename="local/modules/Dealer/Config/schema.xml" referenceOnly="true" />
+    <external-schema filename="local/modules/Team/Config/schema.xml" referenceOnly="true" />
+</database>
