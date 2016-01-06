@@ -32,6 +32,7 @@
             <argument type="service" id="service_container"/>
             <tag name="hook.event_listener" event="dealer.additional" type="back" method="onDealerEditTab"/>
             <tag name="hook.event_listener" event="dealer.edit.js" type="back" method="onDealerEditJs"/>
+            <tag name="hook.event_listener" event="team.edit.nav.bar" type="back" method="onTeamNavBar"/>
         </hook>
     </hooks>
 

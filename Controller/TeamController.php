@@ -102,7 +102,7 @@ class TeamController extends \Team\Controller\TeamController
         if(null === $id){
             $id = $this->getRequest()->request->get("dealer_id");
         }
-        return new RedirectResponse(URL::getInstance()->absoluteUrl("/admin/module/Dealer/dealer/edit#team",["dealer_id" => $id]));
+        return new RedirectResponse(URL::getInstance()->absoluteUrl("/admin/module/Dealer/dealer/edit#dealerteam",["dealer_id" => $id]));
     }
 
 

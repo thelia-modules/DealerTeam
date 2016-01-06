@@ -13,7 +13,16 @@
 
 namespace DealerTeam\Hook;
 
+use Dealer\Model\DealerQuery;
+use Dealer\Model\Map\DealerTableMap;
 use DealerTeam\DealerTeam;
+use DealerTeam\Model\DealerTeamQuery;
+use DealerTeam\Model\Map\DealerTeamTableMap;
+use Propel\Runtime\ActiveQuery\Criteria;
+use Propel\Runtime\ActiveQuery\Join;
+use Team\Model\Map\PersonTeamLinkTableMap;
+use Team\Model\Map\TeamTableMap;
+use Team\Model\Team;
 use Thelia\Core\Event\Hook\HookRenderBlockEvent;
 use Thelia\Core\Event\Hook\HookRenderEvent;
 use Thelia\Core\Hook\BaseHook;
@@ -34,15 +43,16 @@ class AdminHook extends BaseHook
         return $this->trans($id, $parameters, DealerTeam::DOMAIN_NAME, $locale);
     }
 
-    public function onDealerEditTab(HookRenderBlockEvent $event){
+    public function onDealerEditTab(HookRenderBlockEvent $event)
+    {
         $lang = $this->getSession()->getLang();
 
         $event->add(
             [
-                "id" => "team",
+                "id" => "dealerteam",
                 "class" => "",
                 "title" => $this->transQuick("Team", $lang->getLocale()),
-                "content" => $this->render("dealerteam.html",$event->getArguments()),
+                "content" => $this->render("dealerteam.html", $event->getArguments()),
             ]
         );
     }
@@ -50,5 +60,27 @@ class AdminHook extends BaseHook
     public function onDealerEditJs(HookRenderEvent $event)
     {
         $event->add($this->render("js/dealerteam-js.html"));
+    }
+
+    public function onTeamNavBar(HookRenderEvent $event)
+    {
+        $query = DealerTeamQuery::create();
+
+        $joinPerson = new Join(DealerTeamTableMap::TEAM_ID, PersonTeamLinkTableMap::TEAM_ID, Criteria::LEFT_JOIN);
+
+        $query
+            ->addJoinObject($joinPerson)
+            ->where(PersonTeamLinkTableMap::PERSON_ID . " " . Criteria::EQUAL . " " . $event->getArgument("person_id"));
+
+        $dealer = $query->findOne();
+
+        $args = $event->getArguments();
+
+        if(null != $dealer){
+            $args["dealer_id"] = $dealer->getDealerId();
+        }
+
+        $event->add($this->render("includes/person-edit-link.html",$args));
+
     }
 }
