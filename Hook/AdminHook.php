@@ -39,7 +39,7 @@ class AdminHook extends BaseHook
 
         $event->add(
             [
-                "id" => "dealerteam",
+                "id" => "team",
                 "class" => "",
                 "title" => $this->transQuick("Team", $lang->getLocale()),
                 "content" => $this->render("dealerteam.html",$event->getArguments()),
