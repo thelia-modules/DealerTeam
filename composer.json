@@ -5,7 +5,7 @@
   "require": {
     "thelia/installer": "~1.1",
     "thelia/dealer-module" : ">=2.0",
-    "thelia/team-module" : ">=1.0.1"
+    "thelia/team-module" : ">=1.0"
   },
   "extra": {
     "installer-name": "DealerTeam"
