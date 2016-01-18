@@ -6,7 +6,7 @@
     <input type="hidden" name="{$name}" value="{$LOCALE}"/>
 {/form_field}
 {/loop}
-{render_form_field form=$form field="success_url" value={url path="/admin/module/Dealer/dealer/edit#dealerteam" dealer_id=$dealer_id}}
+{render_form_field form=$form field="success_url" value={$success_url|default:{url path='/admin/module/Team/person/update?person_id=_ID_'}}}
 {if {$update|default:false} == false}
     {form_field form=$form field="team_id"}
         <input type="hidden" id="{$label_attr.for}" name="{$name}" value=""/>
