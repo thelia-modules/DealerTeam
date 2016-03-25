@@ -26,6 +26,7 @@ use Team\Model\Team;
 use Thelia\Core\Event\Hook\HookRenderBlockEvent;
 use Thelia\Core\Event\Hook\HookRenderEvent;
 use Thelia\Core\Hook\BaseHook;
+use Thelia\Core\Security\AccessManager;
 use Thelia\Core\Translation\Translator;
 
 /**
@@ -34,6 +35,14 @@ use Thelia\Core\Translation\Translator;
  */
 class AdminHook extends BaseHook
 {
+    protected $container;
+
+
+    public function __construct($container)
+    {
+        $this->container = $container;
+    }
+
     protected function transQuick($id, $locale, $parameters = [])
     {
         if ($this->translator === null) {
@@ -45,16 +54,18 @@ class AdminHook extends BaseHook
 
     public function onDealerEditTab(HookRenderBlockEvent $event)
     {
-        $lang = $this->getSession()->getLang();
+        if ($this->checkAuth(DealerTeam::RESOURCES_TEAM, [], AccessManager::VIEW)) {
+            $lang = $this->getSession()->getLang();
 
-        $event->add(
-            [
-                "id" => "dealerteam",
-                "class" => "",
-                "title" => $this->transQuick("Team", $lang->getLocale()),
-                "content" => $this->render("dealerteam.html", $event->getArguments()),
-            ]
-        );
+            $event->add(
+                [
+                    "id" => "dealerteam",
+                    "class" => "",
+                    "title" => $this->transQuick("Team", $lang->getLocale()),
+                    "content" => $this->render("dealerteam.html", $event->getArguments()),
+                ]
+            );
+        }
     }
 
     public function onDealerEditJs(HookRenderEvent $event)
@@ -76,11 +87,36 @@ class AdminHook extends BaseHook
 
         $args = $event->getArguments();
 
-        if(null != $dealer){
+        if (null != $dealer) {
             $args["dealer_id"] = $dealer->getDealerId();
         }
 
-        $event->add($this->render("includes/person-edit-link.html",$args));
+        $event->add($this->render("includes/person-edit-link.html", $args));
 
+    }
+
+    protected function checkAuth($resources, $modules, $accesses)
+    {
+        $resources = is_array($resources) ? $resources : array($resources);
+        $modules = is_array($modules) ? $modules : array($modules);
+        $accesses = is_array($accesses) ? $accesses : array($accesses);
+
+        if ($this->getSecurityContext()->isGranted(array("ADMIN"), $resources, $modules, $accesses)) {
+            // Okay !
+            return true;
+        }
+
+        return false;
+
+    }
+
+    /**
+     * Return the security context, by default in admin mode.
+     *
+     * @return \Thelia\Core\Security\SecurityContext
+     */
+    protected function getSecurityContext()
+    {
+        return $this->container->get('thelia.securityContext');
     }
 }

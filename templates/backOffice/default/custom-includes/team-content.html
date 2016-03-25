@@ -31,7 +31,7 @@
       <div class="col-md-3">
       </div>
       <div class="col-md-6 inner-actions text-right">
-        {loop name="auth-create" type="auth" role="ADMIN" resource="admin.module" access="CREATE" module="Dealer"}
+        {loop name="auth-create" type="auth" role="ADMIN" resource="admin.dealer.team" access="CREATE" module="Dealer"}
           <div class="pull-right">
             <a class="btn btn-default btn-primary"
                title="{intl l='Create a new Team' d='team.bo.default'}"
@@ -51,14 +51,14 @@
               <h4 class="panel-title">
                 <div class="pull-right">
 
-                  {loop name="auth-edit" type="auth" role="ADMIN" resource="admin.module" access="CREATE" module="Team"}
+                  {loop name="auth-edit" type="auth" role="ADMIN" resource="admin.dealer.team" access="CREATE" module="Team"}
                     <a class="btn btn-primary btn-xs person-create"
                        title="{intl l='Create a Person' d='team.bo.default'}"
                        data-target="#person-create" data-toggle="modal" data-id="{$ID}">
                       <i class="glyphicon glyphicon-plus-sign"></i>
                     </a>
                   {/loop}
-                  {loop name="auth-edit" type="auth" role="ADMIN" resource="admin.module" access="UPDATE" module="Team"}
+                  {loop name="auth-edit" type="auth" role="ADMIN" resource="admin.dealer.team" access="UPDATE" module="Team"}
                     <a class="btn btn-default btn-xs team-update"
                        title="{intl l='Modify this Team' d='team.bo.default'}"
                        data-target="#team-update" data-toggle="modal" data-id="{$ID}"
@@ -66,7 +66,7 @@
                       <i class="glyphicon glyphicon-edit"></i>
                     </a>
                   {/loop}
-                  {loop name="auth-delete" type="auth" role="ADMIN" resource="admin.module" access="DELETE" module="Team"}
+                  {loop name="auth-delete" type="auth" role="ADMIN" resource="admin.dealer.team" access="DELETE" module="Team"}
                     <a class="btn btn-default btn-xs team-delete"
                        title="{intl l='Delete this Team' d='team.bo.default'}"
                        data-target="#team-delete" data-toggle="modal" data-id="{$ID}">
