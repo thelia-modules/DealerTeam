@@ -112,13 +112,6 @@ abstract class DealerTeamVersion implements ActiveRecordInterface
     protected $dealer_id_version;
 
     /**
-     * The value for the team_id_version field.
-     * Note: this column has a database default value of: 0
-     * @var        int
-     */
-    protected $team_id_version;
-
-    /**
      * @var        DealerTeam
      */
     protected $aDealerTeam;
@@ -141,7 +134,6 @@ abstract class DealerTeamVersion implements ActiveRecordInterface
     {
         $this->version = 0;
         $this->dealer_id_version = 0;
-        $this->team_id_version = 0;
     }
 
     /**
@@ -531,17 +523,6 @@ abstract class DealerTeamVersion implements ActiveRecordInterface
     }
 
     /**
-     * Get the [team_id_version] column value.
-     *
-     * @return   int
-     */
-    public function getTeamIdVersion()
-    {
-
-        return $this->team_id_version;
-    }
-
-    /**
      * Set the value of [id] column.
      *
      * @param      int $v new value
@@ -735,27 +716,6 @@ abstract class DealerTeamVersion implements ActiveRecordInterface
     } // setDealerIdVersion()
 
     /**
-     * Set the value of [team_id_version] column.
-     *
-     * @param      int $v new value
-     * @return   \DealerTeam\Model\DealerTeamVersion The current object (for fluent API support)
-     */
-    public function setTeamIdVersion($v)
-    {
-        if ($v !== null) {
-            $v = (int) $v;
-        }
-
-        if ($this->team_id_version !== $v) {
-            $this->team_id_version = $v;
-            $this->modifiedColumns[DealerTeamVersionTableMap::TEAM_ID_VERSION] = true;
-        }
-
-
-        return $this;
-    } // setTeamIdVersion()
-
-    /**
      * Indicates whether the columns in this object are only set to default values.
      *
      * This method can be used in conjunction with isModified() to indicate whether an object is both
@@ -770,10 +730,6 @@ abstract class DealerTeamVersion implements ActiveRecordInterface
             }
 
             if ($this->dealer_id_version !== 0) {
-                return false;
-            }
-
-            if ($this->team_id_version !== 0) {
                 return false;
             }
 
@@ -839,9 +795,6 @@ abstract class DealerTeamVersion implements ActiveRecordInterface
 
             $col = $row[TableMap::TYPE_NUM == $indexType ? 8 + $startcol : DealerTeamVersionTableMap::translateFieldName('DealerIdVersion', TableMap::TYPE_PHPNAME, $indexType)];
             $this->dealer_id_version = (null !== $col) ? (int) $col : null;
-
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 9 + $startcol : DealerTeamVersionTableMap::translateFieldName('TeamIdVersion', TableMap::TYPE_PHPNAME, $indexType)];
-            $this->team_id_version = (null !== $col) ? (int) $col : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -850,7 +803,7 @@ abstract class DealerTeamVersion implements ActiveRecordInterface
                 $this->ensureConsistency();
             }
 
-            return $startcol + 10; // 10 = DealerTeamVersionTableMap::NUM_HYDRATE_COLUMNS.
+            return $startcol + 9; // 9 = DealerTeamVersionTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating \DealerTeam\Model\DealerTeamVersion object", 0, $e);
@@ -1098,9 +1051,6 @@ abstract class DealerTeamVersion implements ActiveRecordInterface
         if ($this->isColumnModified(DealerTeamVersionTableMap::DEALER_ID_VERSION)) {
             $modifiedColumns[':p' . $index++]  = 'DEALER_ID_VERSION';
         }
-        if ($this->isColumnModified(DealerTeamVersionTableMap::TEAM_ID_VERSION)) {
-            $modifiedColumns[':p' . $index++]  = 'TEAM_ID_VERSION';
-        }
 
         $sql = sprintf(
             'INSERT INTO dealer_team_version (%s) VALUES (%s)',
@@ -1138,9 +1088,6 @@ abstract class DealerTeamVersion implements ActiveRecordInterface
                         break;
                     case 'DEALER_ID_VERSION':
                         $stmt->bindValue($identifier, $this->dealer_id_version, PDO::PARAM_INT);
-                        break;
-                    case 'TEAM_ID_VERSION':
-                        $stmt->bindValue($identifier, $this->team_id_version, PDO::PARAM_INT);
                         break;
                 }
             }
@@ -1224,9 +1171,6 @@ abstract class DealerTeamVersion implements ActiveRecordInterface
             case 8:
                 return $this->getDealerIdVersion();
                 break;
-            case 9:
-                return $this->getTeamIdVersion();
-                break;
             default:
                 return null;
                 break;
@@ -1265,7 +1209,6 @@ abstract class DealerTeamVersion implements ActiveRecordInterface
             $keys[6] => $this->getVersionCreatedAt(),
             $keys[7] => $this->getVersionCreatedBy(),
             $keys[8] => $this->getDealerIdVersion(),
-            $keys[9] => $this->getTeamIdVersion(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
@@ -1337,9 +1280,6 @@ abstract class DealerTeamVersion implements ActiveRecordInterface
             case 8:
                 $this->setDealerIdVersion($value);
                 break;
-            case 9:
-                $this->setTeamIdVersion($value);
-                break;
         } // switch()
     }
 
@@ -1373,7 +1313,6 @@ abstract class DealerTeamVersion implements ActiveRecordInterface
         if (array_key_exists($keys[6], $arr)) $this->setVersionCreatedAt($arr[$keys[6]]);
         if (array_key_exists($keys[7], $arr)) $this->setVersionCreatedBy($arr[$keys[7]]);
         if (array_key_exists($keys[8], $arr)) $this->setDealerIdVersion($arr[$keys[8]]);
-        if (array_key_exists($keys[9], $arr)) $this->setTeamIdVersion($arr[$keys[9]]);
     }
 
     /**
@@ -1394,7 +1333,6 @@ abstract class DealerTeamVersion implements ActiveRecordInterface
         if ($this->isColumnModified(DealerTeamVersionTableMap::VERSION_CREATED_AT)) $criteria->add(DealerTeamVersionTableMap::VERSION_CREATED_AT, $this->version_created_at);
         if ($this->isColumnModified(DealerTeamVersionTableMap::VERSION_CREATED_BY)) $criteria->add(DealerTeamVersionTableMap::VERSION_CREATED_BY, $this->version_created_by);
         if ($this->isColumnModified(DealerTeamVersionTableMap::DEALER_ID_VERSION)) $criteria->add(DealerTeamVersionTableMap::DEALER_ID_VERSION, $this->dealer_id_version);
-        if ($this->isColumnModified(DealerTeamVersionTableMap::TEAM_ID_VERSION)) $criteria->add(DealerTeamVersionTableMap::TEAM_ID_VERSION, $this->team_id_version);
 
         return $criteria;
     }
@@ -1474,7 +1412,6 @@ abstract class DealerTeamVersion implements ActiveRecordInterface
         $copyObj->setVersionCreatedAt($this->getVersionCreatedAt());
         $copyObj->setVersionCreatedBy($this->getVersionCreatedBy());
         $copyObj->setDealerIdVersion($this->getDealerIdVersion());
-        $copyObj->setTeamIdVersion($this->getTeamIdVersion());
         if ($makeNew) {
             $copyObj->setNew(true);
         }
@@ -1567,7 +1504,6 @@ abstract class DealerTeamVersion implements ActiveRecordInterface
         $this->version_created_at = null;
         $this->version_created_by = null;
         $this->dealer_id_version = null;
-        $this->team_id_version = null;
         $this->alreadyInSave = false;
         $this->clearAllReferences();
         $this->applyDefaultValues();
