@@ -58,7 +58,7 @@ class DealerTeamVersionTableMap extends TableMap
     /**
      * The total number of columns
      */
-    const NUM_COLUMNS = 10;
+    const NUM_COLUMNS = 9;
 
     /**
      * The number of lazy-loaded columns
@@ -68,7 +68,7 @@ class DealerTeamVersionTableMap extends TableMap
     /**
      * The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS)
      */
-    const NUM_HYDRATE_COLUMNS = 10;
+    const NUM_HYDRATE_COLUMNS = 9;
 
     /**
      * the column name for the ID field
@@ -116,11 +116,6 @@ class DealerTeamVersionTableMap extends TableMap
     const DEALER_ID_VERSION = 'dealer_team_version.DEALER_ID_VERSION';
 
     /**
-     * the column name for the TEAM_ID_VERSION field
-     */
-    const TEAM_ID_VERSION = 'dealer_team_version.TEAM_ID_VERSION';
-
-    /**
      * The default string format for model objects of the related table
      */
     const DEFAULT_STRING_FORMAT = 'YAML';
@@ -132,12 +127,12 @@ class DealerTeamVersionTableMap extends TableMap
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        self::TYPE_PHPNAME       => array('Id', 'DealerId', 'TeamId', 'CreatedAt', 'UpdatedAt', 'Version', 'VersionCreatedAt', 'VersionCreatedBy', 'DealerIdVersion', 'TeamIdVersion', ),
-        self::TYPE_STUDLYPHPNAME => array('id', 'dealerId', 'teamId', 'createdAt', 'updatedAt', 'version', 'versionCreatedAt', 'versionCreatedBy', 'dealerIdVersion', 'teamIdVersion', ),
-        self::TYPE_COLNAME       => array(DealerTeamVersionTableMap::ID, DealerTeamVersionTableMap::DEALER_ID, DealerTeamVersionTableMap::TEAM_ID, DealerTeamVersionTableMap::CREATED_AT, DealerTeamVersionTableMap::UPDATED_AT, DealerTeamVersionTableMap::VERSION, DealerTeamVersionTableMap::VERSION_CREATED_AT, DealerTeamVersionTableMap::VERSION_CREATED_BY, DealerTeamVersionTableMap::DEALER_ID_VERSION, DealerTeamVersionTableMap::TEAM_ID_VERSION, ),
-        self::TYPE_RAW_COLNAME   => array('ID', 'DEALER_ID', 'TEAM_ID', 'CREATED_AT', 'UPDATED_AT', 'VERSION', 'VERSION_CREATED_AT', 'VERSION_CREATED_BY', 'DEALER_ID_VERSION', 'TEAM_ID_VERSION', ),
-        self::TYPE_FIELDNAME     => array('id', 'dealer_id', 'team_id', 'created_at', 'updated_at', 'version', 'version_created_at', 'version_created_by', 'dealer_id_version', 'team_id_version', ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+        self::TYPE_PHPNAME       => array('Id', 'DealerId', 'TeamId', 'CreatedAt', 'UpdatedAt', 'Version', 'VersionCreatedAt', 'VersionCreatedBy', 'DealerIdVersion', ),
+        self::TYPE_STUDLYPHPNAME => array('id', 'dealerId', 'teamId', 'createdAt', 'updatedAt', 'version', 'versionCreatedAt', 'versionCreatedBy', 'dealerIdVersion', ),
+        self::TYPE_COLNAME       => array(DealerTeamVersionTableMap::ID, DealerTeamVersionTableMap::DEALER_ID, DealerTeamVersionTableMap::TEAM_ID, DealerTeamVersionTableMap::CREATED_AT, DealerTeamVersionTableMap::UPDATED_AT, DealerTeamVersionTableMap::VERSION, DealerTeamVersionTableMap::VERSION_CREATED_AT, DealerTeamVersionTableMap::VERSION_CREATED_BY, DealerTeamVersionTableMap::DEALER_ID_VERSION, ),
+        self::TYPE_RAW_COLNAME   => array('ID', 'DEALER_ID', 'TEAM_ID', 'CREATED_AT', 'UPDATED_AT', 'VERSION', 'VERSION_CREATED_AT', 'VERSION_CREATED_BY', 'DEALER_ID_VERSION', ),
+        self::TYPE_FIELDNAME     => array('id', 'dealer_id', 'team_id', 'created_at', 'updated_at', 'version', 'version_created_at', 'version_created_by', 'dealer_id_version', ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, )
     );
 
     /**
@@ -147,12 +142,12 @@ class DealerTeamVersionTableMap extends TableMap
      * e.g. self::$fieldKeys[self::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        self::TYPE_PHPNAME       => array('Id' => 0, 'DealerId' => 1, 'TeamId' => 2, 'CreatedAt' => 3, 'UpdatedAt' => 4, 'Version' => 5, 'VersionCreatedAt' => 6, 'VersionCreatedBy' => 7, 'DealerIdVersion' => 8, 'TeamIdVersion' => 9, ),
-        self::TYPE_STUDLYPHPNAME => array('id' => 0, 'dealerId' => 1, 'teamId' => 2, 'createdAt' => 3, 'updatedAt' => 4, 'version' => 5, 'versionCreatedAt' => 6, 'versionCreatedBy' => 7, 'dealerIdVersion' => 8, 'teamIdVersion' => 9, ),
-        self::TYPE_COLNAME       => array(DealerTeamVersionTableMap::ID => 0, DealerTeamVersionTableMap::DEALER_ID => 1, DealerTeamVersionTableMap::TEAM_ID => 2, DealerTeamVersionTableMap::CREATED_AT => 3, DealerTeamVersionTableMap::UPDATED_AT => 4, DealerTeamVersionTableMap::VERSION => 5, DealerTeamVersionTableMap::VERSION_CREATED_AT => 6, DealerTeamVersionTableMap::VERSION_CREATED_BY => 7, DealerTeamVersionTableMap::DEALER_ID_VERSION => 8, DealerTeamVersionTableMap::TEAM_ID_VERSION => 9, ),
-        self::TYPE_RAW_COLNAME   => array('ID' => 0, 'DEALER_ID' => 1, 'TEAM_ID' => 2, 'CREATED_AT' => 3, 'UPDATED_AT' => 4, 'VERSION' => 5, 'VERSION_CREATED_AT' => 6, 'VERSION_CREATED_BY' => 7, 'DEALER_ID_VERSION' => 8, 'TEAM_ID_VERSION' => 9, ),
-        self::TYPE_FIELDNAME     => array('id' => 0, 'dealer_id' => 1, 'team_id' => 2, 'created_at' => 3, 'updated_at' => 4, 'version' => 5, 'version_created_at' => 6, 'version_created_by' => 7, 'dealer_id_version' => 8, 'team_id_version' => 9, ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+        self::TYPE_PHPNAME       => array('Id' => 0, 'DealerId' => 1, 'TeamId' => 2, 'CreatedAt' => 3, 'UpdatedAt' => 4, 'Version' => 5, 'VersionCreatedAt' => 6, 'VersionCreatedBy' => 7, 'DealerIdVersion' => 8, ),
+        self::TYPE_STUDLYPHPNAME => array('id' => 0, 'dealerId' => 1, 'teamId' => 2, 'createdAt' => 3, 'updatedAt' => 4, 'version' => 5, 'versionCreatedAt' => 6, 'versionCreatedBy' => 7, 'dealerIdVersion' => 8, ),
+        self::TYPE_COLNAME       => array(DealerTeamVersionTableMap::ID => 0, DealerTeamVersionTableMap::DEALER_ID => 1, DealerTeamVersionTableMap::TEAM_ID => 2, DealerTeamVersionTableMap::CREATED_AT => 3, DealerTeamVersionTableMap::UPDATED_AT => 4, DealerTeamVersionTableMap::VERSION => 5, DealerTeamVersionTableMap::VERSION_CREATED_AT => 6, DealerTeamVersionTableMap::VERSION_CREATED_BY => 7, DealerTeamVersionTableMap::DEALER_ID_VERSION => 8, ),
+        self::TYPE_RAW_COLNAME   => array('ID' => 0, 'DEALER_ID' => 1, 'TEAM_ID' => 2, 'CREATED_AT' => 3, 'UPDATED_AT' => 4, 'VERSION' => 5, 'VERSION_CREATED_AT' => 6, 'VERSION_CREATED_BY' => 7, 'DEALER_ID_VERSION' => 8, ),
+        self::TYPE_FIELDNAME     => array('id' => 0, 'dealer_id' => 1, 'team_id' => 2, 'created_at' => 3, 'updated_at' => 4, 'version' => 5, 'version_created_at' => 6, 'version_created_by' => 7, 'dealer_id_version' => 8, ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, )
     );
 
     /**
@@ -180,7 +175,6 @@ class DealerTeamVersionTableMap extends TableMap
         $this->addColumn('VERSION_CREATED_AT', 'VersionCreatedAt', 'TIMESTAMP', false, null, null);
         $this->addColumn('VERSION_CREATED_BY', 'VersionCreatedBy', 'VARCHAR', false, 100, null);
         $this->addColumn('DEALER_ID_VERSION', 'DealerIdVersion', 'INTEGER', false, null, 0);
-        $this->addColumn('TEAM_ID_VERSION', 'TeamIdVersion', 'INTEGER', false, null, 0);
     } // initialize()
 
     /**
@@ -387,7 +381,6 @@ class DealerTeamVersionTableMap extends TableMap
             $criteria->addSelectColumn(DealerTeamVersionTableMap::VERSION_CREATED_AT);
             $criteria->addSelectColumn(DealerTeamVersionTableMap::VERSION_CREATED_BY);
             $criteria->addSelectColumn(DealerTeamVersionTableMap::DEALER_ID_VERSION);
-            $criteria->addSelectColumn(DealerTeamVersionTableMap::TEAM_ID_VERSION);
         } else {
             $criteria->addSelectColumn($alias . '.ID');
             $criteria->addSelectColumn($alias . '.DEALER_ID');
@@ -398,7 +391,6 @@ class DealerTeamVersionTableMap extends TableMap
             $criteria->addSelectColumn($alias . '.VERSION_CREATED_AT');
             $criteria->addSelectColumn($alias . '.VERSION_CREATED_BY');
             $criteria->addSelectColumn($alias . '.DEALER_ID_VERSION');
-            $criteria->addSelectColumn($alias . '.TEAM_ID_VERSION');
         }
     }
 

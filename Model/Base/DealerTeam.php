@@ -28,7 +28,6 @@ use Propel\Runtime\Parser\AbstractParser;
 use Propel\Runtime\Util\PropelDateTime;
 use Team\Model\Team as ChildTeam;
 use Team\Model\TeamQuery;
-use Team\Model\TeamVersionQuery;
 
 abstract class DealerTeam implements ActiveRecordInterface
 {
@@ -1935,10 +1934,6 @@ abstract class DealerTeam implements ActiveRecordInterface
             return true;
         }
 
-        if (null !== ($object = $this->getTeam($con)) && $object->isVersioningNecessary($con)) {
-            return true;
-        }
-
 
         return false;
     }
@@ -1966,9 +1961,6 @@ abstract class DealerTeam implements ActiveRecordInterface
         $version->setDealerTeam($this);
         if (($related = $this->getDealer($con)) && $related->getVersion()) {
             $version->setDealerIdVersion($related->getVersion());
-        }
-        if (($related = $this->getTeam($con)) && $related->getVersion()) {
-            $version->setTeamIdVersion($related->getVersion());
         }
         $version->save($con);
 
@@ -2027,20 +2019,6 @@ abstract class DealerTeam implements ActiveRecordInterface
                 $related->setNew(false);
             }
             $this->setDealer($related);
-        }
-        if ($fkValue = $version->getTeamId()) {
-            if (isset($loadedObjects['ChildTeam']) && isset($loadedObjects['ChildTeam'][$fkValue]) && isset($loadedObjects['ChildTeam'][$fkValue][$version->getTeamIdVersion()])) {
-                $related = $loadedObjects['ChildTeam'][$fkValue][$version->getTeamIdVersion()];
-            } else {
-                $related = new ChildTeam();
-                $relatedVersion = TeamVersionQuery::create()
-                    ->filterById($fkValue)
-                    ->filterByVersion($version->getTeamIdVersion())
-                    ->findOne($con);
-                $related->populateFromVersion($relatedVersion, $con, $loadedObjects);
-                $related->setNew(false);
-            }
-            $this->setTeam($related);
         }
 
         return $this;

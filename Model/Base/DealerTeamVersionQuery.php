@@ -30,7 +30,6 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildDealerTeamVersionQuery orderByVersionCreatedAt($order = Criteria::ASC) Order by the version_created_at column
  * @method     ChildDealerTeamVersionQuery orderByVersionCreatedBy($order = Criteria::ASC) Order by the version_created_by column
  * @method     ChildDealerTeamVersionQuery orderByDealerIdVersion($order = Criteria::ASC) Order by the dealer_id_version column
- * @method     ChildDealerTeamVersionQuery orderByTeamIdVersion($order = Criteria::ASC) Order by the team_id_version column
  *
  * @method     ChildDealerTeamVersionQuery groupById() Group by the id column
  * @method     ChildDealerTeamVersionQuery groupByDealerId() Group by the dealer_id column
@@ -41,7 +40,6 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildDealerTeamVersionQuery groupByVersionCreatedAt() Group by the version_created_at column
  * @method     ChildDealerTeamVersionQuery groupByVersionCreatedBy() Group by the version_created_by column
  * @method     ChildDealerTeamVersionQuery groupByDealerIdVersion() Group by the dealer_id_version column
- * @method     ChildDealerTeamVersionQuery groupByTeamIdVersion() Group by the team_id_version column
  *
  * @method     ChildDealerTeamVersionQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     ChildDealerTeamVersionQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -63,7 +61,6 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildDealerTeamVersion findOneByVersionCreatedAt(string $version_created_at) Return the first ChildDealerTeamVersion filtered by the version_created_at column
  * @method     ChildDealerTeamVersion findOneByVersionCreatedBy(string $version_created_by) Return the first ChildDealerTeamVersion filtered by the version_created_by column
  * @method     ChildDealerTeamVersion findOneByDealerIdVersion(int $dealer_id_version) Return the first ChildDealerTeamVersion filtered by the dealer_id_version column
- * @method     ChildDealerTeamVersion findOneByTeamIdVersion(int $team_id_version) Return the first ChildDealerTeamVersion filtered by the team_id_version column
  *
  * @method     array findById(int $id) Return ChildDealerTeamVersion objects filtered by the id column
  * @method     array findByDealerId(int $dealer_id) Return ChildDealerTeamVersion objects filtered by the dealer_id column
@@ -74,7 +71,6 @@ use Propel\Runtime\Exception\PropelException;
  * @method     array findByVersionCreatedAt(string $version_created_at) Return ChildDealerTeamVersion objects filtered by the version_created_at column
  * @method     array findByVersionCreatedBy(string $version_created_by) Return ChildDealerTeamVersion objects filtered by the version_created_by column
  * @method     array findByDealerIdVersion(int $dealer_id_version) Return ChildDealerTeamVersion objects filtered by the dealer_id_version column
- * @method     array findByTeamIdVersion(int $team_id_version) Return ChildDealerTeamVersion objects filtered by the team_id_version column
  *
  */
 abstract class DealerTeamVersionQuery extends ModelCriteria
@@ -163,7 +159,7 @@ abstract class DealerTeamVersionQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT ID, DEALER_ID, TEAM_ID, CREATED_AT, UPDATED_AT, VERSION, VERSION_CREATED_AT, VERSION_CREATED_BY, DEALER_ID_VERSION, TEAM_ID_VERSION FROM dealer_team_version WHERE ID = :p0 AND VERSION = :p1';
+        $sql = 'SELECT ID, DEALER_ID, TEAM_ID, CREATED_AT, UPDATED_AT, VERSION, VERSION_CREATED_AT, VERSION_CREATED_BY, DEALER_ID_VERSION FROM dealer_team_version WHERE ID = :p0 AND VERSION = :p1';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);
@@ -627,47 +623,6 @@ abstract class DealerTeamVersionQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(DealerTeamVersionTableMap::DEALER_ID_VERSION, $dealerIdVersion, $comparison);
-    }
-
-    /**
-     * Filter the query on the team_id_version column
-     *
-     * Example usage:
-     * <code>
-     * $query->filterByTeamIdVersion(1234); // WHERE team_id_version = 1234
-     * $query->filterByTeamIdVersion(array(12, 34)); // WHERE team_id_version IN (12, 34)
-     * $query->filterByTeamIdVersion(array('min' => 12)); // WHERE team_id_version > 12
-     * </code>
-     *
-     * @param     mixed $teamIdVersion The value to use as filter.
-     *              Use scalar values for equality.
-     *              Use array values for in_array() equivalent.
-     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
-     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
-     *
-     * @return ChildDealerTeamVersionQuery The current query, for fluid interface
-     */
-    public function filterByTeamIdVersion($teamIdVersion = null, $comparison = null)
-    {
-        if (is_array($teamIdVersion)) {
-            $useMinMax = false;
-            if (isset($teamIdVersion['min'])) {
-                $this->addUsingAlias(DealerTeamVersionTableMap::TEAM_ID_VERSION, $teamIdVersion['min'], Criteria::GREATER_EQUAL);
-                $useMinMax = true;
-            }
-            if (isset($teamIdVersion['max'])) {
-                $this->addUsingAlias(DealerTeamVersionTableMap::TEAM_ID_VERSION, $teamIdVersion['max'], Criteria::LESS_EQUAL);
-                $useMinMax = true;
-            }
-            if ($useMinMax) {
-                return $this;
-            }
-            if (null === $comparison) {
-                $comparison = Criteria::IN;
-            }
-        }
-
-        return $this->addUsingAlias(DealerTeamVersionTableMap::TEAM_ID_VERSION, $teamIdVersion, $comparison);
     }
 
     /**
